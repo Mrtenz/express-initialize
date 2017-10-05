@@ -1,6 +1,6 @@
 {
   "name": "express-initialize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple Express app initializer",
   "main": "index.js",
   "repository": "https://github.com/Mrtenz/express-initialize",
