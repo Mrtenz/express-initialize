@@ -1,0 +1,19 @@
+{
+  "name": "express-initialize",
+  "version": "1.0.0",
+  "description": "A simple Express app initializer",
+  "main": "index.js",
+  "repository": "https://github.com/Mrtenz/express-initialize",
+  "author": "Mrten",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "fs-extra": "^4.0.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.0"
+  }
+}
