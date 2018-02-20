@@ -2,10 +2,10 @@
 A simple Express app initializer.
 
 Install it with NPM or Yarn:
-```
+```bash
 $ npm install --save express-initialize
 ```
-```
+```bash
 $ yarn add express-initialize
 ```
 
@@ -31,7 +31,7 @@ const hbs = handlebars.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(express.static('./static'))
+app.use(express.static('./static'));
 app.use(compression());
 
 app.get('/home', (request, response) => {
@@ -57,16 +57,27 @@ Everything is moved to separate files:
 // app/app.js
 
 const express = require('express');
-const initialize = require('express-initialize');
+const expressInitialize = require('express-initialize');
 
 const app = express();
 
-initialize(app)
+const initializers = getInitializers(); // Load the initializers
+expressInitialize.initialize(app, initializers)
     .then(() => {
         app.listen(80);
     })
     .catch(console.error);
 ```
+
+The function `initialize` takes two arguments: the Express app that will be passed to the initializers and an array containing the initializers.
+
+An initializer is an object which can have three properties:
+
+| Name        | Type                 | Description                                                                       |
+| ----------- | -------------------- | --------------------------------------------------------------------------------- |
+| `name`      | `string`             | Name of the initializer, for usage with `after`.                                  |
+| `after`     | `string or string[]` | Name(s) of the initializer(s) after which the initializer should be run.          |
+| `configure` | `function`           | The function that will be run, takes `app` as argument and may return a Promise.  |
 
 For example, a file for Handlebars.
 ```js
@@ -118,4 +129,3 @@ module.exports = {
     }
 }
 ```
-By default the name of an initializer is the file name (without .js). You can specify your own name by setting the `name` property.
